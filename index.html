@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aura Nest</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#0d0b08;
+  --card:#17130d;
+  --line:rgba(212,168,67,0.18);
+
+  --gold:#D4A843;
+  --gold2:#F5C64A;
+
+  --text:#F6F1E8;
+  --muted:rgba(255,255,255,0.58);
+
+  --green:#5D8768;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Quicksand',sans-serif;
+  overflow-x:hidden;
+}
+
+/* NAV */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:999;
+
+  padding:20px 6%;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  backdrop-filter:blur(12px);
+  background:rgba(13,11,8,0.75);
+
+  border-bottom:1px solid var(--line);
+
+  transition:.3s;
+}
+
+nav.scrolled{
+  padding:14px 6%;
+  background:rgba(13,11,8,0.95);
+}
+
+.logo{
+  font-size:1.4rem;
+  color:var(--gold2);
+
+  font-family:'Cormorant Garamond',serif;
+  text-decoration:none;
+  letter-spacing:.12em;
+}
+
+.nav-links{
+  display:flex;
+  gap:2rem;
+}
+
+.nav-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+}
+
+.nav-links a:hover{
+  color:var(--gold2);
+}
+
+.nav-btn{
+  background:var(--gold);
+  color:#000;
+
+  padding:12px 22px;
+
+  text-decoration:none;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.12em;
+
+  border-radius:4px;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100svh;
+
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+
+  align-items:center;
+
+  padding:7rem 6% 4rem;
+
+  position:relative;
+}
+
+.hero::before{
+  content:'';
+
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(circle at 20% 30%, rgba(212,168,67,0.08), transparent 30%),
+  radial-gradient(circle at 80% 70%, rgba(93,135,104,0.08), transparent 30%);
+}
+
+.hero-left{
+  position:relative;
+  z-index:2;
+}
+
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  margin-bottom:1.5rem;
+}
+
+.eyebrow span{
+  width:50px;
+  height:1px;
+  background:var(--gold);
+}
+
+.eyebrow p{
+  color:var(--gold);
+  font-size:.72rem;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  font-size:clamp(3rem,7vw,6rem);
+
+  line-height:1;
+
+  font-weight:300;
+
+  font-family:'Cormorant Garamond',serif;
+
+  margin-bottom:1rem;
+}
+
+.hero h1 em{
+  color:var(--gold2);
+  font-style:italic;
+}
+
+.hero-sub{
+  color:var(--muted);
+
+  font-size:.82rem;
+
+  letter-spacing:.35em;
+
+  margin-bottom:2rem;
+
+  display:block;
+}
+
+.hero-desc{
+  max-width:520px;
+
+  color:var(--muted);
+
+  line-height:1.9;
+
+  margin-bottom:2.5rem;
+}
+
+.hero-actions{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+.btn-gold{
+  background:var(--gold);
+
+  color:#000;
+
+  padding:15px 28px;
+
+  text-decoration:none;
+
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+
+  border-radius:4px;
+
+  transition:.25s;
+}
+
+.btn-gold:hover{
+  background:var(--gold2);
+  transform:translateY(-2px);
+}
+
+.btn-outline{
+  border:1px solid var(--gold);
+
+  color:var(--gold);
+
+  padding:14px 28px;
+
+  text-decoration:none;
+
+  font-size:.8rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+
+  border-radius:4px;
+}
+
+.hero-right{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+}
+
+.glow{
+  position:absolute;
+
+  width:320px;
+  height:320px;
+
+  border-radius:50%;
+
+  background:radial-gradient(circle, rgba(212,168,67,0.22), transparent 70%);
+
+  animation:pulse 4s infinite ease-in-out;
+}
+
+@keyframes pulse{
+
+  0%,100%{
+    transform:scale(1);
+    opacity:.7;
+  }
+
+  50%{
+    transform:scale(1.15);
+    opacity:1;
+  }
+}
+
+.bottle{
+  position:relative;
+  z-index:2;
+
+  animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-18px);
+  }
+}
+
+.floating{
+  position:absolute;
+
+  padding:10px 18px;
+
+  background:rgba(23,19,13,0.88);
+
+  border:1px solid var(--line);
+
+  backdrop-filter:blur(12px);
+
+  border-radius:8px;
+
+  font-size:.75rem;
+
+  color:var(--text);
+
+  animation:floatTag 4s ease-in-out infinite;
+}
+
+.f1{
+  top:16%;
+  left:0;
+}
+
+.f2{
+  right:0;
+  top:30%;
+
+  animation-delay:1s;
+}
+
+.f3{
+  bottom:20%;
+  left:5%;
+
+  animation-delay:2s;
+}
+
+@keyframes floatTag{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+}
+
+/* SCENTS */
+
+.section{
+  padding:7rem 6%;
+}
+
+.section-head{
+  text-align:center;
+  margin-bottom:4rem;
+}
+
+.section-tag{
+  color:var(--gold);
+
+  text-transform:uppercase;
+
+  font-size:.72rem;
+
+  letter-spacing:.3em;
+
+  margin-bottom:1rem;
+}
+
+.section-title{
+  font-size:clamp(2rem,5vw,4rem);
+
+  font-family:'Cormorant Garamond',serif;
+
+  font-weight:300;
+}
+
+.section-title em{
+  color:var(--gold2);
+}
+
+.scents{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+}
+
+.card{
+  background:var(--card);
+
+  border:1px solid var(--line);
+
+  padding:2rem;
+
+  transition:.3s;
+
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--gold);
+}
+
+.card span{
+  font-size:2rem;
+}
+
+.card h3{
+  margin:1rem 0 .5rem;
+
+  font-family:'Cormorant Garamond',serif;
+
+  font-size:1.5rem;
+}
+
+.card p{
+  color:var(--muted);
+
+  line-height:1.7;
+
+  font-size:.88rem;
+}
+
+/* CTA */
+
+.cta{
+  padding:7rem 6%;
+
+  text-align:center;
+
+  background:linear-gradient(to bottom, #15110c, #0d0b08);
+
+  border-top:1px solid var(--line);
+}
+
+.cta h2{
+  font-size:clamp(2rem,5vw,4rem);
+
+  font-family:'Cormorant Garamond',serif;
+
+  font-weight:300;
+
+  margin-bottom:1rem;
+}
+
+.cta h2 em{
+  color:var(--gold2);
+}
+
+.cta p{
+  color:var(--muted);
+
+  margin-bottom:2rem;
+}
+
+/* FOOTER */
+
+footer{
+  padding:2rem 6%;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  border-top:1px solid var(--line);
+
+  color:var(--muted);
+
+  font-size:.78rem;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:4rem;
+  }
+
+  .hero-desc{
+    margin-inline:auto;
+  }
+
+  .hero-actions{
+    justify-content:center;
+  }
+
+  .scents{
+    grid-template-columns:1fr;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:1rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav id="nav">
+
+  <a href="#" class="logo">
+    ✦ AURA NEST
+  </a>
+
+  <div class="nav-links">
+    <a href="#scents">Mùi hương</a>
+    <a href="#about">Về chúng tôi</a>
+    <a href="#contact">Liên hệ</a>
+  </div>
+
+  <a href="#" class="nav-btn">
+    Đặt Ngay
+  </a>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-left">
+
+    <div class="eyebrow">
+      <span></span>
+      <p>Premium Home Fragrance</p>
+    </div>
+
+    <h1>
+      Biến Căn Phòng<br>
+      Thành Một<br>
+      <em>Không Gian Chill</em>
+    </h1>
+
+    <span class="hero-sub">
+      PREMIUM REED DIFFUSER
+    </span>
+
+    <p class="hero-desc">
+      Aura Nest mang đến trải nghiệm mùi hương cao cấp cho phòng ngủ,
+      góc làm việc và không gian sống của bạn.
+      Tối giản, hiện đại và đầy cảm xúc.
+    </p>
+
+    <div class="hero-actions">
+
+      <a href="#" class="btn-gold">
+        Đặt Mua
+      </a>
+
+      <a href="#scents" class="btn-outline">
+        Khám Phá
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="hero-right">
+
+    <div class="glow"></div>
+
+    <div class="floating f1">
+      🌿 Natural
+    </div>
+
+    <div class="floating f2">
+      ✦ Premium
+    </div>
+
+    <div class="floating f3">
+      🐾 Pet Safe
+    </div>
+
+    <svg class="bottle" width="260" height="430" viewBox="0 0 260 430" fill="none">
+
+      <ellipse cx="130" cy="395" rx="70" ry="10" fill="rgba(0,0,0,0.4)"/>
+
+      <!-- reeds -->
+
+      <line x1="118" y1="80" x2="95" y2="0"
+      stroke="#5D8768"
+      stroke-width="3"
+      stroke-linecap="round"/>
+
+      <line x1="130" y1="80" x2="130" y2="-8"
+      stroke="#5D8768"
+      stroke-width="2.5"
+      stroke-linecap="round"/>
+
+      <line x1="142" y1="80" x2="165" y2="0"
+      stroke="#5D8768"
+      stroke-width="3"
+      stroke-linecap="round"/>
+
+      <!-- bottle -->
+
+      <rect x="70" y="90"
+      width="120"
+      height="280"
+      rx="12"
+      fill="#18120C"/>
+
+      <rect x="88" y="55"
+      width="84"
+      height="35"
+      rx="8"
+      fill="#2B2317"/>
+
+      <rect x="98" y="75"
+      width="64"
+      height="20"
+      rx="4"
+      fill="#1C1711"/>
+
+      <!-- label -->
+
+      <rect x="92"
+      y="160"
+      width="76"
+      height="110"
+      rx="6"
+
+      fill="rgba(212,168,67,0.06)"
+      stroke="rgba(212,168,67,0.28)"/>
+
+      <text x="130"
+      y="190"
+      text-anchor="middle"
+      fill="#D4A843"
+      font-size="10"
+      font-family="serif"
+      letter-spacing="4">
+
+      AURA
+
+      </text>
+
+      <line x1="105"
+      y1="205"
+      x2="155"
+      y2="205"
+      stroke="rgba(212,168,67,0.2)"/>
+
+      <text x="130"
+      y="235"
+      text-anchor="middle"
+      fill="rgba(255,255,255,0.8)"
+      font-size="18"
+      font-family="serif">
+
+      Nàng
+
+      </text>
+
+    </svg>
+
+  </div>
+
+</section>
+
+<!-- SCENTS -->
+
+<section class="section" id="scents">
+
+  <div class="section-head">
+
+    <div class="section-tag">
+      Fragrance Collection
+    </div>
+
+    <h2 class="section-title">
+      Mùi Hương<br>
+      <em>Được Yêu Thích</em>
+    </h2>
+
+  </div>
+
+  <div class="scents">
+
+    <div class="card">
+      <span>🌸</span>
+      <h3>Nàng</h3>
+      <p>
+        Ngọt nhẹ, nữ tính và dễ chịu.
+        Phù hợp phòng ngủ và không gian chill.
+      </p>
+    </div>
+
+    <div class="card">
+      <span>🌧️</span>
+      <h3>Mưa</h3>
+      <p>
+        Mùi đất sau cơn mưa.
+        Thư giãn, sạch và healing.
+      </p>
+    </div>
+
+    <div class="card">
+      <span>🔥</span>
+      <h3>Cay & Ấm</h3>
+      <p>
+        Hồ tiêu, vanilla và amber.
+        Đậm chất luxury.
+      </p>
+    </div>
+
+    <div class="card">
+      <span>🍵</span>
+      <h3>Trà Vải</h3>
+      <p>
+        Trà xanh kết hợp vải thiều.
+        Tươi và hiện đại.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta" id="contact">
+
+  <h2>
+    Sẵn Sàng Làm Phòng Bạn<br>
+    <em>Thơm Hơn Chưa?</em>
+  </h2>
+
+  <p>
+    Aura Nest sẽ tư vấn mùi hương phù hợp với không gian của bạn.
+  </p>
+
+  <a href="#" class="btn-gold">
+    Nhắn Tin Ngay
+  </a>
+
+</section>
+
+<footer>
+
+  <div>
+    © 2026 Aura Nest
+  </div>
+
+  <div>
+    Premium Home Fragrance
+  </div>
+
+</footer>
+
+<script>
+
+window.addEventListener('scroll',()=>{
+
+  const nav=document.getElementById('nav');
+
+  if(window.scrollY>20){
+    nav.classList.add('scrolled');
+  }else{
+    nav.classList.remove('scrolled');
+  }
+
+});
+
+</script>
+
+</body>
+</html>
